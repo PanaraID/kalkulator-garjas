@@ -661,11 +661,11 @@
       return result;
     }
 
-    // TODO belom
-    function calculateSitUp(pushUp, gender) {
+    // TODO selesai
+    function calculateSitUp(sitUp, gender) {
       let result = 0;
-      if (gender === 'male' && (pushUp >= 1 && pushUp <= 40)) {
-        switch (pushUp) {
+      if (gender === 'male' && (sitUp >= 1 && sitUp <= 40)) {
+        switch (sitUp) {
           case 6:
             result = 1;
             break;
@@ -772,8 +772,111 @@
             result = 100;
             break;
         }
-      } else if (gender === 'female' && (pushUp >= 1 && pushUp <= 37)) {
-        // TODO
+      } else if (gender === 'female' && (sitUp >= 1 && sitUp <= 37)) {
+        switch (sitUp) {
+          case 17:
+            result = 1;
+            break;
+          case 18:
+            result = 3;
+            break;
+          case 19:
+            result = 6;
+            break;
+          case 20:
+            result = 10;
+            break;
+          case 21:
+            result = 12;
+            break;
+          case 22:
+            result = 15;
+            break;
+          case 23:
+            result = 19;
+            break;
+          case 24:
+            result = 21;
+            break;
+          case 25:
+            result = 24;
+            break;
+          case 26:
+            result = 26;
+            break;
+          case 27:
+            result = 29;
+            break;
+          case 28:
+            result = 33;
+            break;
+          case 29:
+            result = 37;
+            break;
+          case 30:
+            result = 39;
+            break;
+          case 31:
+            result = 42;
+            break;
+          case 32:
+            result = 46;
+            break;
+          case 33:
+            result = 48;
+            break;
+          case 34:
+            result = 51;
+            break;
+          case 35:
+            result = 55;
+            break;
+          case 36:
+            result = 57;
+            break;
+          case 37:
+            result = 60;
+            break;
+          case 38:
+            result = 64;
+            break;
+          case 39:
+            result = 66;
+            break;
+          case 40:
+            result = 69;
+            break;
+          case 41:
+            result = 73;
+            break;
+          case 42:
+            result = 75;
+            break;
+          case 43:
+            result = 78;
+            break;
+          case 44:
+            result = 82;
+            break;
+          case 45:
+            result = 84;
+            break;
+          case 46:
+            result = 87;
+            break;
+          case 47:
+            result = 91;
+            break;
+          case 48:
+            result = 93;
+            break;
+          case 49:
+            result = 96;
+            break;
+          case 50:
+            result = 100;
+            break;
+        }
       }
       return result;
     }

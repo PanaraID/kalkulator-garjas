@@ -36,7 +36,8 @@
       margin-top: 10px;
     }
 
-    input[type="number"] {
+    input,
+    select {
       margin-top: 5px;
       padding: 8px;
       font-size: 16px;
@@ -99,8 +100,71 @@
         <input type="number" id="chiningUp" />
       </div>
 
-      <label for="shuttleRun">Jumlah Shuttle Run:</label>
-      <input type="number" id="shuttleRun" />
+      <label>Jumlah Shuttle Run:</label>
+      <select name="shuttleRunMale" id="shuttleRunMale">
+        <option value="100">16,2</option>
+        <option value="99">16,3</option>
+        <option value="98">16,4</option>
+        <option value="97">16,5</option>
+        <option value="96">16,6</option>
+        <option value="95">16,7</option>
+        <option value="94">16,8</option>
+        <option value="92">16,9</option>
+        <option value="90">17</option>
+        <option value="88">17,1</option>
+        <option value="86">17,2</option>
+        <option value="84">17,3</option>
+        <option value="82">17,4</option>
+        <option value="80">17,5</option>
+        <option value="78">17,6</option>
+        <option value="76">17,7</option>
+        <option value="74">17,8</option>
+        <option value="72">17,9</option>
+        <option value="70">18</option>
+        <option value="68">18,1</option>
+        <option value="66">18,2</option>
+        <option value="64">18,3</option>
+        <option value="62">18,4</option>
+        <option value="60">18,5</option>
+        <option value="58">18,6</option>
+        <option value="56">18,7</option>
+        <option value="54">18,8</option>
+        <option value="52">18,9</option>
+        <option value="51">19</option>
+        <option value="49">19,1</option>
+        <option value="47">19,2</option>
+        <option value="45">19,3</option>
+        <option value="43">19,4</option>
+        <option value="41">19,5</option>
+        <option value="40">19,6</option>
+        <option value="38">19,7</option>
+        <option value="36">19,8</option>
+        <option value="34">19,9</option>
+        <option value="32">20</option>
+        <option value="30">20,1</option>
+        <option value="28">20,2</option>
+        <option value="26">20,3</option>
+        <option value="24">20,4</option>
+        <option value="22">20,5</option>
+        <option value="21">20,6</option>
+        <option value="19">20,7</option>
+        <option value="17">20,8</option>
+        <option value="15">20,9</option>
+        <option value="13">21</option>
+        <option value="11">21,1</option>
+        <option value="10">21,2</option>
+        <option value="8">21,3</option>
+        <option value="6">21,4</option>
+        <option value="4">21,5</option>
+        <option value="2">21,6</option>
+        <option value="0">21,7</option>
+      </select>
+      <select name="shuttleRunFemale" id="shuttleRunFemale" class="d-none">
+        <option value="volvo">cewek</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
     </div>
 
     <div>
@@ -191,6 +255,16 @@
         document.getElementById('resultChiningUp').classList.remove("d-none");
       }
 
+      function maleShuttleRun() {
+        document.getElementById('shuttleRunMale').classList.remove("d-none");
+        document.getElementById('shuttleRunFemale').classList.add("d-none");
+      }
+
+      function femaleShuttleRun() {
+        document.getElementById('shuttleRunFemale').classList.remove("d-none");
+        document.getElementById('shuttleRunMale').classList.add("d-none");
+      }
+
       function maleSwimTime() {
         document.getElementById('option-swimtime-male').classList.remove("d-none");
         document.getElementById('option-swimtime-female').classList.add("d-none");
@@ -207,17 +281,23 @@
       if (gender === 'male') {
         hideChiningUp();
         showPullUp();
+
+        maleShuttleRun();
         maleSwimTime();
       } else if (gender === 'female') {
         hidePullUp();
         showChiningUp();
+
+        femaleShuttleRun();
         femaleSwimTime();
       }
+
+      // Menyembunyikan result
+      document.getElementById('result').classList.add("d-none");
     }
 
     document.getElementById('gender').onchange = genderOnChange;
 
-    // TODO selesai
     function calculateDistance(gender, distance) {
       let result = 0;
       if (gender === 'male' && (distance >= 1349 && distance <= 3444)) {
@@ -424,7 +504,6 @@
       return result;
     }
 
-    // TODO selesai
     function calculatePushUp(pushUp, gender) {
       let result = 0;
       if (gender === 'male' && (pushUp >= 1 && pushUp <= 43)) {
@@ -661,7 +740,6 @@
       return result;
     }
 
-    // TODO selesai
     function calculateSitUp(sitUp, gender) {
       let result = 0;
       if (gender === 'male' && (sitUp >= 1 && sitUp <= 40)) {
@@ -881,7 +959,6 @@
       return result;
     }
 
-    // TODO selesai
     function calculatePullUp(pullUp) {
       let result = 0;
       if (pullUp >= 1) {
@@ -945,7 +1022,6 @@
       return result;
     }
 
-    // TODO selesai
     function calculateChinning(chiningUp) {
       let result = 0;
       if (chiningUp >= 33 && chiningUp <= 72) {
@@ -1101,12 +1177,26 @@
       points['swimTime'] = undefined;
 
       if (gender === 'male') {
-        swimTime = document.getElementById('swimTimeMale').value;
+        const buffer = document.getElementById('shuttleRunMale');
+
+        shuttleRun = buffer.options[buffer.selectedIndex].textContent;
+        points['shuttleRun'] = buffer.value;
       } else if (gender === 'female') {
-        swimTime = document.getElementById('swimTimeFemale').value;
+        const buffer = document.getElementById('shuttleRunFemale');
+
+        shuttleRun = buffer.options[buffer.selectedIndex].textContent;
+        points['shuttleRun'] = buffer.value;
       }
 
+      // if (gender === 'male') {
+      //   swimTime = document.getElementById('swimTimeMale').value;
+      // } else if (gender === 'female') {
+      //   swimTime = document.getElementById('swimTimeFemale').value;
+      // }
+
       function setResult() {
+        document.getElementById("result").classList.remove("d-none");
+
         document.getElementById("distance").innerHTML = `${runDistance} meter (${points['runDistance']} poin)`;
         document.getElementById("pushup").innerHTML = `${pushUp} (${points['pushUp']} poin)`;
         document.getElementById("situp").innerHTML = `${sitUp} (${points['sitUp']} poin)`;

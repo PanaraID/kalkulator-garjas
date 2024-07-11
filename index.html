@@ -440,6 +440,8 @@
             </ul>
           </li>
         </ul>
+        <h2>Hasil</h2>
+        <p id="finalResult"></p>
       </div>
     </div>
   </div>
@@ -1415,17 +1417,43 @@
         document.getElementById("result").classList.remove("d-none");
 
         document.getElementById("distance").innerHTML = `${runDistance} meter (${points['runDistance']} poin)`;
+
         document.getElementById("pushup").innerHTML = `${pushUp} (${points['pushUp']} poin)`;
         document.getElementById("situp").innerHTML = `${sitUp} (${points['sitUp']} poin)`;
-
         document.getElementById("pullup").innerHTML = `${pullUp} (${points['pullUp']} poin)`;
         document.getElementById("chiningup").innerHTML = `${chiningUp} (${points['chiningUp']} poin)`;
-
         document.getElementById("shuttlerun").innerHTML = `${shuttleRun} (${points['shuttleRun']} poin)`;
+
         document.getElementById("swimtime").innerHTML = `${swimTime} (${points['swimTime']} poin)`;
       }
 
+      function setFinalResult() {
+        const poinGarjasA = points["runDistance"];
+
+        // GARJAS B
+        //=================================================
+        const pushUp = points["pushUp"];
+        const sitUp = points["sitUp"];
+        const shuttleRun = points["shuttleRun"];
+        // Untuk pullup dan chiningup sesuaikan gender
+        const pullUp = points["pullUp"];
+        const chiningUp = points["chiningUp"];
+        const sesuaiGender = gender === "male" ? pullUp : chiningUp;
+        const poinGarjasB = () => (pushUp + sitUp + sesuaiGender + shuttleRun) / 4;
+
+        const poinGarjasC = points["swimTime"];
+
+        const nilaiAkhir = parseInt(poinGarjasA) + parseInt(poinGarjasB()) + parseInt(poinGarjasC);
+
+        document.getElementById("finalResult").innerHTML = `
+          Nilai Akhir (dari ${poinGarjasA} + 
+          ((${pushUp} + ${sitUp} + ${shuttleRun} + (${sesuaiGender}) ) / 4) 
+          + ${poinGarjasC}): ${nilaiAkhir} poin
+        `;
+      }
+
       setResult();
+      setFinalResult();
     }
   </script>
 </body>
